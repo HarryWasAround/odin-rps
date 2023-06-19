@@ -1,5 +1,8 @@
 alert("Open your console")
-/* A function that that randomly returns either "Rock", "Paper or "Scissors" using the Math.random() and Math.floor() 
+let playerScore = 0;
+let compScore = 0;
+
+/* A callback function that that randomly returns either "Rock", "Paper or "Scissors" using the Math.random() and Math.floor() 
 methods as well as switch statements to display the right result in each of the 3 cases*/
 
 function getComputerChoice(){
@@ -22,37 +25,67 @@ function getComputerChoice(){
 selection using the previous function) and that plays a single round of r-p-s and then logs a string in the console 
 that shows the result of the round*/
 
-function round(playerSelection, computerSelection){
+function playRound(playerSelection, computerSelection){
     computerSelection = getComputerChoice();
-    console.log("Rock, Paper, Scissors, Shoot!")
-    playerSelection = prompt("Chose", "");
+
+    playerSelection = prompt("Rock, Paper, Scissors, Shoot!", "");
+
     playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+
     if (playerSelection === computerSelection){
-        return console.log("It's a tie");
+        ++compScore;
+        ++playerScore;
+        return "It's a draw";
     }
     else if(playerSelection === "Rock" && computerSelection === "Paper"){
-        return console.log("You lose! Paper beats Rock");
+        ++compScore;
+        return `You lose! Paper beats Rock`;
     }
     else if(playerSelection === "Paper" && computerSelection === "Rock"){
-        return console.log("You win! Paper beats Rock");
+        ++playerScore;
+        return `You win! Paper beats Rock`;
     }
     else if(playerSelection === "Scissors" && computerSelection === "Rock"){
-        return console.log("You lose! Rock beats Scissors");
+        ++compScore;
+        return `You lose! Rock beats Scissors`;
     }
-    else if(playerSelection === "Rock" && computerSelection === "Scissors"){
-        return console.log("You win! Rock beats Scissors");
+    else if(playerSelection === "Rock" && computerSelection === "Scissors"){        
+        ++playerScore;
+        return `You win! Rock beats Scissors`;
     }
     else if(playerSelection === "Scissors" && computerSelection === "Paper"){
-        return console.log("You win! Scissors beat Paper");
-    }
+        ++playerScore;
+        return `You win! Scissors beat Paper`;
+    }   
     else if(playerSelection === "Paper" && computerSelection === "Scissors"){
-        return console.log("You lose! Scissors beat Paper");
+        ++compScore;
+        return `You lose!  beat Paper`;
     } else{
-        return console.log("Misimput!");
+        ++compScore;
+        return "Misimput!";
     }
 }
+/* A helper callback function that keeps score*/
 
-round();
+//Actually, scratch that.
 
 
-/* A function that plays 5 rounds inside of it using the previous function and keeps score, as well as reporting the final results at the end*/
+/* A function that plays 5 rounds inside of it using the previous function, as well as reporting the final results at the end*/
+
+function game(){
+
+    console.log(playRound());
+    console.log(playRound());
+    console.log(playRound());
+    console.log(playRound());
+    console.log(playRound());
+    if (playerScore < compScore){
+        return console.log("You've lost ):");
+    }
+    else if (playerScore > compScore){
+        return console.log("You've won! (:");
+    }else {
+        return console.log("Please learn to type");
+    } 
+}
+game();

@@ -122,7 +122,7 @@ function game() {
 
         let updateSelection = (e) => {    
 
-            playerChoice = e.srcElement.className;
+            playerChoice = e.target.className;
             playRound();
             score.textContent = `${playerScore}  /  ${compScore}`;
             
